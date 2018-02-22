@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="10dp"
+    android:layout_margin="10sp"
+    card_view:cardBackgroundColor="#824713"
+    card_view:cardUseCompatPadding="true">
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="14dp"
+        android:layout_margin="12sp"
+        >
+
+        <TextView
+            android:id="@+id/merName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Himanshu"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:textSize="24sp"/>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

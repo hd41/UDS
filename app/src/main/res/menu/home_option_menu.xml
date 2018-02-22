@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/loginActivity"
+        android:title="Login Page"/>
+    <item
+        android:id="@+id/vendorSignUp"
+        android:title="Vendor SignUp"/>
+    <item
+        android:id="@+id/exit"
+        android:title="Exit"/>
+</menu>
