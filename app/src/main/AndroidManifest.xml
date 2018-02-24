@@ -45,7 +45,12 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".OrderByMerchant" />
         <activity android:name=".MenuByMerchant" />
-        <activity android:name=".SingleItemOrder"></activity>
+        <activity android:name=".SingleItemOrder" />
+        <activity android:name=".HomeWithLogin" />
+        <activity
+            android:name=".Profile"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -1,16 +1,13 @@
 package com.example.himanshudhanwant.uds;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,16 +26,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 
-import static android.R.id.list;
-
-public class Home extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
+public class HomeWithLogin extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
 
     MyRecyclerViewAdapter adapter;
     KhanaRecyclerViewAdapter mAdapter;
@@ -56,7 +47,7 @@ public class Home extends AppCompatActivity implements MyRecyclerViewAdapter.Ite
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_home_with_login);
 
         btn=(Button)findViewById(R.id.order_by_merchant);
         dataHelper dh= new dataHelper(getApplication());
@@ -78,53 +69,17 @@ public class Home extends AppCompatActivity implements MyRecyclerViewAdapter.Ite
 
         //Second Recycler View
         mRecyclerView = (RecyclerView)findViewById(R.id.khana_recycler_view);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(Home.this, 2));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(HomeWithLogin.this, 2));
         //adapter is set at getImages() function
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Implementing an alert to Login
-
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(Home.this);
-
-                // Setting Dialog Title
-                alertDialog.setTitle("Alert");
-
-                // Setting Dialog Message
-                alertDialog.setMessage("Login to Proceed");
-
-                // Setting Icon to Dialog
-                alertDialog.setIcon(R.drawable.add_user);
-
-                // Setting Positive "Yes" Button
-                alertDialog.setPositiveButton("Login", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int which) {
-
-                        // Write your code here to invoke YES event
-                        Intent in = new Intent(getApplicationContext(),LoginActivity.class);
-                        startActivity(in);
-                    }
-                });
-
-                // Setting Negative "NO" Button
-                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Write your code here to invoke NO event
-                        Toast.makeText(getApplicationContext(), "You clicked on NO", Toast.LENGTH_SHORT).show();
-                        dialog.cancel();
-                    }
-                });
-
-                // Showing Alert Message
-                alertDialog.show();
-
-                //new fetchMerchants().execute();
+                new HomeWithLogin.fetchMerchants().execute();
             }
         });
 
         fillmRecyclerView();
-
     }
 
     class fetchMerchants extends AsyncTask<Void, Void, String> {
@@ -132,7 +87,7 @@ public class Home extends AppCompatActivity implements MyRecyclerViewAdapter.Ite
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(Home.this);
+            pDialog = new ProgressDialog(HomeWithLogin.this);
             pDialog.setMessage("Fetching merchants ...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
@@ -190,7 +145,7 @@ public class Home extends AppCompatActivity implements MyRecyclerViewAdapter.Ite
     }
 
     public void fillmRecyclerView(){
-        mAdapter = new KhanaRecyclerViewAdapter(Home.this, GetAllItems.imageURLs,GetAllItems.bitmaps,GetAllItems.itemNames,GetAllItems.itemCosts,GetAllItems.Ids);
+        mAdapter = new KhanaRecyclerViewAdapter(HomeWithLogin.this, GetAllItems.imageURLs,GetAllItems.bitmaps,GetAllItems.itemNames,GetAllItems.itemCosts,GetAllItems.Ids);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -223,8 +178,8 @@ public class Home extends AppCompatActivity implements MyRecyclerViewAdapter.Ite
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.add_user_icon, menu);
-        inflater.inflate(R.menu.home_option_menu, menu);
+        inflater.inflate(R.menu.cart_icon, menu);
+        inflater.inflate(R.menu.home_with_login_menu, menu);
         // return true so that the menu pop up is opened
         return true;
     }
@@ -233,21 +188,21 @@ public class Home extends AppCompatActivity implements MyRecyclerViewAdapter.Ite
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId())
         {
-
-            case R.id.loginActivity:
-                Intent in1 =new Intent(Home.this,LoginActivity.class);
+            // TODO: adding profile activity
+            case R.id.profile:
+                Intent in1 =new Intent(getApplicationContext(),Profile.class);
                 startActivity(in1);
                 break;
-            case R.id.vendorSignUp:
-                Intent in2 =new Intent(getApplicationContext(),VendorSignUp.class);
+            case R.id.cart:
+                Intent in2 =new Intent(getApplicationContext(),Cart.class);
                 startActivity(in2);
                 break;
             case R.id.exit:
                 finish();
                 break;
         }
-        if(item.getItemId()==R.id.login) {
-            Intent intent = new Intent(this,LoginActivity.class);
+        if(item.getItemId()==R.id.action_cart) {
+            Intent intent = new Intent(this,Cart.class);
             startActivity(intent);
             return true;
         }

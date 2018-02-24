@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -51,5 +54,21 @@ public class MenuByMerchant extends AppCompatActivity {
                 startActivity(in);
             }
         });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.cart_icon, menu);
+        // return true so that the menu pop up is opened
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.action_cart) {
+            Intent intent = new Intent(this,Cart.class);
+            startActivity(intent);
+            return true;
+        }
+        return true;
     }
 }

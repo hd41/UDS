@@ -1,6 +1,7 @@
 package com.example.himanshudhanwant.uds;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ public class Cart extends AppCompatActivity implements CartRecyclerAdapter.ItemC
     Button pro;
     TextView tv;
     String final_order="";  int total=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,32 +1,32 @@
 package com.example.himanshudhanwant.uds;
 
-        import android.app.Activity;
-        import android.app.ProgressDialog;
-        import android.net.ConnectivityManager;
-        import android.net.NetworkInfo;
-        import android.os.AsyncTask;
-        import android.os.Bundle;
-        import android.support.v7.app.AppCompatActivity;
-        import android.util.Log;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
-        import android.content.Intent;
-        import android.view.View;
-        import android.widget.Button;
-        import android.widget.EditText;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.content.Intent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
-        import org.apache.http.NameValuePair;
-        import org.apache.http.message.BasicNameValuePair;
-        import org.json.JSONArray;
-        import org.json.JSONException;
-        import org.json.JSONObject;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-        import java.util.ArrayList;
-        import java.util.List;
-
-//        import butterknife.ButterKnife;
-//        import butterknife.InjectView;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -42,10 +42,17 @@ public class LoginActivity extends AppCompatActivity {
     int flag;
     String usrName, usrMail, usrPhone;
 
+    SharedPreferences sharedpreferences;
+    SharedPreferences.Editor editor;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        sharedpreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        editor = sharedpreferences.edit();
         //ButterKnife.inject(this);
         _emailText= (EditText)findViewById(R.id.input_email);
         _passwordText= (EditText)findViewById(R.id.input_password);
@@ -59,6 +66,9 @@ public class LoginActivity extends AppCompatActivity {
                     String mail=_emailText.getText().toString();
                     String pwd= _passwordText.getText().toString();
                     new Login(mail,pwd).execute();
+
+                    //for returning to the previous activity
+                    finishActivity(7);
                 }
             }
         });
@@ -80,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
 
-                // TODO: Implement successful signup logic here
+                // TODO: Implement successful signIn logic here
                 // By default we just finish the Activity and log them in automatically
                 this.finish();
             }
@@ -129,7 +139,10 @@ public class LoginActivity extends AppCompatActivity {
                         usrMail = c.getString("mail");
                         usrPhone = c.getString("phone");
                         flag =1;
-                        Log.d("test",usrName);
+                        editor.putString("loginName",usrName);
+                        editor.putString("loginMail",usrMail);
+                        editor.putString("loginPhone",usrPhone);
+                        editor.commit();
                     }
                 }else if(no.matches("2")){
 //                    JSONObject jsonObj = new JSONObject(temp[1]);
@@ -140,6 +153,12 @@ public class LoginActivity extends AppCompatActivity {
                         usrMail = c.getString("email");
                         usrPhone = c.getString("phone");
                         flag =2;
+                        editor.putString("loginName",usrName);
+                        editor.putString("loginMail",usrMail);
+                        editor.putString("loginPhone",usrPhone);
+                        editor.commit();
+                        //editor.clear(); for clearing all preferences
+                        //editor.commit();
                     }
                 }else{
                     flag=3;
@@ -157,7 +176,7 @@ public class LoginActivity extends AppCompatActivity {
                 case 1: Intent in = new Intent(getApplicationContext(),UploadItem.class);
                     startActivity(in);
                     break;
-                case 2: Intent in2= new Intent(getApplicationContext(),Home.class);
+                case 2: Intent in2= new Intent(getApplicationContext(),HomeWithLogin.class);
                     startActivity(in2);
                     break;
                 case 3: _emailText.setError("Email or password incorrect");
