@@ -190,7 +190,7 @@ public class Home extends AppCompatActivity implements MyRecyclerViewAdapter.Ite
     }
 
     public void fillmRecyclerView(){
-        mAdapter = new KhanaRecyclerViewAdapter(Home.this, GetAllItems.imageURLs,GetAllItems.bitmaps,GetAllItems.itemNames,GetAllItems.itemCosts,GetAllItems.Ids);
+        mAdapter = new KhanaRecyclerViewAdapter(Home.this, GetAllItems.imageURLs,GetAllItems.itemNames,GetAllItems.itemCosts,GetAllItems.Ids);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

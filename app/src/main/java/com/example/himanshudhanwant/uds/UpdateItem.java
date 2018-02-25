@@ -13,6 +13,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
@@ -35,6 +38,7 @@ public class UpdateItem extends AppCompatActivity {
 
     String updatedName,updatedCost;
     int update_ID;
+    GetAllItems getAllItems = new GetAllItems();
 
     JSONParser jsonParser=new JSONParser();
 
@@ -57,7 +61,12 @@ public class UpdateItem extends AppCompatActivity {
         Bundle b2=in.getBundleExtra("bun");
         int pos=b2.getInt("pos");
         update_ID=b2.getInt("id");
-        iv.setImageBitmap(GetAllItems.bitmaps[pos]);
+//        iv.setImageBitmap(GetAllItems.bitmaps[pos]);
+        Glide.with(getApplicationContext()).load(getAllItems.getAllUrls(pos))
+                .thumbnail(0.5f)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(iv);
         et1.setText(b2.getString("itemName"));
         et2.setText("Rs. "+b2.getString("cost"));
 
@@ -76,6 +85,7 @@ public class UpdateItem extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 delete();
+
             }
         });
     }
@@ -110,17 +120,7 @@ public class UpdateItem extends AppCompatActivity {
                 JSONObject json =jsonParser.makeHttpRequest(strings[0],
                             "POST", params);
 
-//                try {
-////                    int success = json.getInt(TAG_SUCCESS);
-////
-////                    if (success == 1) {
-////                        finish();
-////                    } else {
-////                        //Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
-////                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
+                finish();
 
                 return null;
             }
@@ -143,7 +143,7 @@ public class UpdateItem extends AppCompatActivity {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
-                Toast.makeText(getApplicationContext(),"Deleted Successfully!!",Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             @Override

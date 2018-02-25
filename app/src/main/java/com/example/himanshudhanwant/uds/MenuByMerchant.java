@@ -38,7 +38,7 @@ public class MenuByMerchant extends AppCompatActivity {
     }
 
     public void fillmRecyclerView(){
-        mAdapter = new KhanaRecyclerViewAdapter(MenuByMerchant.this, GetMerchantItems.imageURLs,GetMerchantItems.bitmaps,
+        mAdapter = new KhanaRecyclerViewAdapter(MenuByMerchant.this, GetMerchantItems.imageURLs,
                 GetMerchantItems.itemNames,GetMerchantItems.itemCosts,GetMerchantItems.Ids);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {

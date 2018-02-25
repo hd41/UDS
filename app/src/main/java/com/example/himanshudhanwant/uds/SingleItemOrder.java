@@ -15,6 +15,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +29,7 @@ public class SingleItemOrder extends AppCompatActivity implements AdapterView.On
     ImageView iv;
 
     TextView cost1,name1;
-    GetAllItems getAllItems;
+    GetAllItems getAllItems = new GetAllItems();
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // On selecting a spinner item
@@ -59,7 +62,13 @@ public class SingleItemOrder extends AppCompatActivity implements AdapterView.On
         final String mer=b2.getString("mer");
         final int pos=b2.getInt("pos");
 
-        iv.setImageBitmap(getAllItems.bitmaps[pos]);
+//        iv.setImageBitmap(getAllItems.bitmaps[pos]);
+        Log.d("test",getAllItems.getAllUrls(pos));
+        Glide.with(getApplicationContext()).load(getAllItems.getAllUrls(pos))
+                .thumbnail(0.5f)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(iv);
         name1.setText(name);
         cost1.setText("Rs. "+cost);
         cos=Integer.parseInt(cost);

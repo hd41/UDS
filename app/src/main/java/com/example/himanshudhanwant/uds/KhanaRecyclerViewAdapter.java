@@ -13,6 +13,9 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import java.util.List;
 
 public class KhanaRecyclerViewAdapter extends RecyclerView.Adapter<KhanaRecyclerViewAdapter.GridItemViewHolder> {
@@ -23,14 +26,13 @@ public class KhanaRecyclerViewAdapter extends RecyclerView.Adapter<KhanaRecycler
     private String[] itemNames;
     private String[] itemCosts;
     private int[] Ids;
-    private Bitmap[] bitmaps;
+//    private Bitmap[] bitmaps;
 
-    public KhanaRecyclerViewAdapter(Context context, String[] urls, Bitmap[] bitmaps,String[] itemsName, String[] itemCost,
+    public KhanaRecyclerViewAdapter(Context context, String[] urls,String[] itemsName, String[] itemCost,
                                     int[] ids) {
         this.context = context;
-        this.context = context;
         this.urls= urls;
-        this.bitmaps= bitmaps;
+//        this.bitmaps= bitmaps;
         this.itemNames=itemsName;
         this.itemCosts=itemCost;
         this.Ids=ids;
@@ -46,7 +48,13 @@ public class KhanaRecyclerViewAdapter extends RecyclerView.Adapter<KhanaRecycler
     public void onBindViewHolder(GridItemViewHolder holder, int position) {
         holder.tit.setText(itemNames[position]);
         holder.cos.setText(itemCosts[position]);
-        holder.iv.setImageBitmap(bitmaps[position]);
+//        holder.iv.setImageBitmap(bitmaps[position]);
+
+        Glide.with(context).load(urls[position])
+                .thumbnail(0.5f)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.iv);
     }
 
     @Override

@@ -107,8 +107,15 @@ public class StartActivity extends Activity {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
 //                loading.dismiss();
-                getAllItems = new GetAllItems(s);
-                getImages();
+                try{
+                    getAllItems = new GetAllItems(s);
+                    getImages();
+                }
+                catch (Exception ex){
+                    Intent in= new Intent(getApplicationContext(),ConnectionError.class);
+                    startActivity(in);
+                }
+
             }
 
             @Override

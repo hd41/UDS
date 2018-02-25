@@ -11,6 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 /**
  * Created by Himanshu Dhanwant on 23-Nov-17.
  */
@@ -21,15 +24,15 @@ public class CustomList extends ArrayAdapter<String> {
     private String[] itemNames;
     private String[] itemCosts;
     private int[] Ids;
-    private Bitmap[] bitmaps;
+//    private Bitmap[] bitmaps;
     private Activity context;
 
-    public CustomList(Activity context, String[] urls, Bitmap[] bitmaps,String[] itemsName, String[] itemCost,
+    public CustomList(Activity context, String[] urls,String[] itemsName, String[] itemCost,
                       int[] ids) {
         super(context, R.layout.single_item_vendor, urls);
         this.context = context;
         this.urls= urls;
-        this.bitmaps= bitmaps;
+//        this.bitmaps= bitmaps;
         this.itemNames=itemsName;
         this.itemCosts=itemCost;
         this.Ids=ids;
@@ -46,7 +49,12 @@ public class CustomList extends ArrayAdapter<String> {
         textViewName.setText(itemNames[position]);
         textViewCost.setText("Rs. "+itemCosts[position]);
 
-        image.setImageBitmap(Bitmap.createScaledBitmap(bitmaps[position],100,70,false));
+//        image.setImageBitmap(Bitmap.createScaledBitmap(bitmaps[position],100,70,false));
+        Glide.with(context).load(urls[position])
+                .thumbnail(0.5f)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(image);
         return  listViewItem;
     }
 }

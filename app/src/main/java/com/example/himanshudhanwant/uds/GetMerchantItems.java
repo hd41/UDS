@@ -22,7 +22,7 @@ public class GetMerchantItems {
     public static String[] imageURLs;
     public static String[] itemNames;
     public static String[] itemCosts;
-    public static Bitmap[] bitmaps;
+//    public static Bitmap[] bitmaps;
 
 
     public static final String JSON_ARRAY="result";
@@ -61,7 +61,7 @@ public class GetMerchantItems {
     }
 
     public void getAllImages() throws JSONException {
-        bitmaps = new Bitmap[urls.length()];
+//        bitmaps = new Bitmap[urls.length()];
         Ids=new int[urls.length()];
         imageURLs = new String[urls.length()];
         itemNames= new String[urls.length()];
@@ -74,7 +74,7 @@ public class GetMerchantItems {
             itemCosts[i]=urls.getJSONObject(i).getString(ITEM_COST);
             Log.d("test",imageURLs[i]+" : "+itemNames[i]+" : "+itemCosts[i]);
             JSONObject jsonObject = urls.getJSONObject(i);
-            bitmaps[i]=getImage(jsonObject);
+//            bitmaps[i]=getImage(jsonObject);
         }
     }
 }

@@ -23,7 +23,7 @@ public class GetAllItems {
     public static String[] itemNames;
     public static String[] itemCosts;
     public static String[] itemMerchant;
-    public static Bitmap[] bitmaps;
+//    public static Bitmap[] bitmaps;
 
     public static ArrayList<String> merchants=new ArrayList<String>();
 
@@ -47,6 +47,10 @@ public class GetAllItems {
     }
     public GetAllItems(){
         //mauja maaro
+    }
+
+    public String getAllUrls(int pos){
+        return imageURLs[pos];
     }
 
     public void putMerchants(ArrayList<String> a){
@@ -78,7 +82,7 @@ public class GetAllItems {
     }
 
     public void getAllImages() throws JSONException {
-        bitmaps = new Bitmap[urls.length()];
+//        bitmaps = new Bitmap[urls.length()];
         Ids=new int[urls.length()];
         imageURLs = new String[urls.length()];
         itemNames= new String[urls.length()];
@@ -93,7 +97,7 @@ public class GetAllItems {
             itemMerchant[i]=urls.getJSONObject(i).getString(MERCHANT);
             Log.d("test",imageURLs[i]+" : "+itemNames[i]+" : "+itemCosts[i]);
             JSONObject jsonObject = urls.getJSONObject(i);
-            bitmaps[i]=getImage(jsonObject);
+//            bitmaps[i]=getImage(jsonObject);
         }
     }
 }

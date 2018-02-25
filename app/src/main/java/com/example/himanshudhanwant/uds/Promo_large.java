@@ -17,6 +17,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +27,7 @@ public class Promo_large extends AppCompatActivity implements AdapterView.OnItem
 
     TextView tv,cost1;
     ImageView iv;
-    GetAllItems getAllItems;
+    GetAllItems getAllItems = new GetAllItems();
     Spinner spinner;
     Button addToCart;
     Integer qty=0;
@@ -67,7 +70,13 @@ public class Promo_large extends AppCompatActivity implements AdapterView.OnItem
 
         cost1.setText("Rs. "+cos);
         tv.setText(name);
-        iv.setImageBitmap(getAllItems.bitmaps[pos]);
+//        iv.setImageBitmap(getAllItems.bitmaps[pos]);
+        Log.d("test",getAllItems.getAllUrls(pos));
+        Glide.with(getApplicationContext()).load(getAllItems.getAllUrls(pos))
+                .thumbnail(0.5f)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(iv);
 
         spinner.setOnItemSelectedListener(this);
         List <Integer> lis= new ArrayList<Integer>();

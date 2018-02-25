@@ -50,7 +50,7 @@ public class ItemList extends AppCompatActivity implements AdapterView.OnItemCli
                 super.onPostExecute(v);
                 loading.dismiss();
                 //Toast.makeText(ImageListView.this,"Success",Toast.LENGTH_LONG).show();
-                CustomList customList = new CustomList(ItemList.this,GetAllItems.imageURLs,GetAllItems.bitmaps,GetAllItems.itemNames,GetAllItems.itemCosts,GetAllItems.Ids);
+                CustomList customList = new CustomList(ItemList.this,GetAllItems.imageURLs,GetAllItems.itemNames,GetAllItems.itemCosts,GetAllItems.Ids);
                 listView.setAdapter(customList);
             }
 

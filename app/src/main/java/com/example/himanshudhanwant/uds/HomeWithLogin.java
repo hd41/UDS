@@ -145,7 +145,7 @@ public class HomeWithLogin extends AppCompatActivity implements MyRecyclerViewAd
     }
 
     public void fillmRecyclerView(){
-        mAdapter = new KhanaRecyclerViewAdapter(HomeWithLogin.this, GetAllItems.imageURLs,GetAllItems.bitmaps,GetAllItems.itemNames,GetAllItems.itemCosts,GetAllItems.Ids);
+        mAdapter = new KhanaRecyclerViewAdapter(HomeWithLogin.this, GetAllItems.imageURLs,GetAllItems.itemNames,GetAllItems.itemCosts,GetAllItems.Ids);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
