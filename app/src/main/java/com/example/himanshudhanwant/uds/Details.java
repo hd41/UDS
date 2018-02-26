@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,20 +38,24 @@ public class Details extends AppCompatActivity {
 
     String addr,result,phone;
     public static final String url_insert_menu="https://app-1496457103.000webhostapp.com/PhotoUpload/insertOrder.php";
-    public static String name="Himanshu Dhanwant";
+    public static String name;
     public static String merchant;
+
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
         final SmsManager smsManager = SmsManager.getDefault();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent i2=getIntent();
         Bundle b2=i2.getBundleExtra("bun");
         String res=b2.getString("final_order");
+        Log.d("test: res ",res);
         merchant=b2.getString("mer");
         int tot=b2.getInt("tot");
 
@@ -61,7 +67,8 @@ public class Details extends AppCompatActivity {
 
         //TODO : After login credentials take name and merchant's name and merchant's phone no
         final String phoneNo = "9467587898";
-        et1.setText(name);
+        et1.setText(pref.getString("loginName",""));
+        et2.setText(pref.getString("loginPhone",""));
         tv1.setText("Rs." +tot);
         tv1.setTextSize(32);
         addr =et2.getText().toString();

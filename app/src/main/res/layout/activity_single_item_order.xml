@@ -32,7 +32,7 @@
                 android:layout_height="260sp"
                 android:layout_gravity="center"
                 android:layout_marginTop="18sp"
-                android:src="@drawable/dog" />
+                android:src="@drawable/horse" />
 
 
             <LinearLayout

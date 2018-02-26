@@ -138,10 +138,12 @@ public class LoginActivity extends AppCompatActivity {
                         usrName = c.getString("name");
                         usrMail = c.getString("mail");
                         usrPhone = c.getString("phone");
+                        String merch= c.getString("merchant");
                         flag =1;
                         editor.putString("loginName",usrName);
                         editor.putString("loginMail",usrMail);
                         editor.putString("loginPhone",usrPhone);
+                        editor.putString("loginMer",merch);
                         editor.commit();
                     }
                 }else if(no.matches("2")){

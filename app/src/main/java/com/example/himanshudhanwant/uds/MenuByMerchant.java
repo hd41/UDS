@@ -29,8 +29,6 @@ public class MenuByMerchant extends AppCompatActivity {
         Bundle bun1=in.getBundleExtra("bun");
         merName=bun1.getString("merName");
 
-        Log.d("test: menuByMerchant",merName);
-
         mRecyclerView = (RecyclerView)findViewById(R.id.merchant_item_recycler_view);
         mRecyclerView.setLayoutManager(new GridLayoutManager(MenuByMerchant.this, 2));
 

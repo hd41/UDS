@@ -8,6 +8,7 @@
     tools:context="com.example.himanshudhanwant.uds.UploadItem">
 
     <TextView
+        android:id="@+id/merName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Amul Shop"

@@ -33,6 +33,14 @@ public class GetMerchantItems {
     private String json;
     private JSONArray urls;
 
+    public String getAllUrls(int pos){
+        return imageURLs[pos];
+    }
+
+    public GetMerchantItems(){
+        //Aish karo
+    }
+
     public GetMerchantItems(String json){
         this.json = json;
         try {

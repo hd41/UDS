@@ -53,10 +53,9 @@ public class HomeWithLogin extends AppCompatActivity implements MyRecyclerViewAd
         dataHelper dh= new dataHelper(getApplication());
         dh.delete_all();
 
-        animalNames.add(R.drawable.horse);
-        animalNames.add(R.drawable.dog);
-        animalNames.add(R.drawable.camel);
-        animalNames.add(R.drawable.cat);
+        for(int i=0;i<5;i++){
+            animalNames.add(R.drawable.horse);
+        }
 
         // set up the RecyclerView
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.promo_recycler_view);
@@ -120,7 +119,7 @@ public class HomeWithLogin extends AppCompatActivity implements MyRecyclerViewAd
 
                 JSONObject object=new JSONObject(result1);
                 JSONArray new_array = object.getJSONArray("result");
-
+                merchants.clear();
                 for (int i = 0, count = new_array.length(); i < count; i++) {
                     try {
                         JSONObject jsonObject = new_array.getJSONObject(i);
@@ -164,13 +163,13 @@ public class HomeWithLogin extends AppCompatActivity implements MyRecyclerViewAd
 
     @Override
     public void onItemClick(View view, int position) {
-        Intent in =new Intent(getApplicationContext(),Promo_large.class);
+        Intent in =new Intent(getApplicationContext(),SingleItemOrder.class);
         Bundle bu=new Bundle();
         Toast.makeText(getApplicationContext(),"you clicked "+position,Toast.LENGTH_SHORT).show();
-        bu.putInt("pos",position);
-        bu.putString("name",getAllItems.itemNames[position]);
-        bu.putString("cost",getAllItems.itemCosts[position]);
-        bu.putString("mer",getAllItems.itemMerchant[position]);
+        bu.putInt("pos",9-2*position-1);
+        bu.putString("name",getAllItems.itemNames[9-2*position-1]);
+        bu.putString("cost",getAllItems.itemCosts[9-2*position-1]);
+        bu.putString("mer",getAllItems.itemMerchant[9-2*position-1]);
         in.putExtra("bun",bu);
         startActivity(in);
     }

@@ -1,5 +1,7 @@
 package com.example.himanshudhanwant.uds;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.Manifest;
@@ -11,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.net.HttpURLConnection;
 import android.graphics.Bitmap;
@@ -36,6 +39,8 @@ import java.net.URLEncoder;
 import java.io.UnsupportedEncodingException;
 import android.util.Base64;
 
+import org.json.JSONException;
+
 public class UploadItem extends AppCompatActivity {
 
     Button CaptureImageFromCamera,UploadImageToServer;
@@ -43,6 +48,7 @@ public class UploadItem extends AppCompatActivity {
     EditText imageName,cost;
     ProgressDialog progressDialog ;
     Intent intent ;
+    TextView tv;
     public  static final int RequestPermissionCode  = 1 ;
 
     Bitmap bitmap;
@@ -54,17 +60,22 @@ public class UploadItem extends AppCompatActivity {
     String ImagePathFieldOnServer = "image_path" ;
     String ImageUploadPathOnSever ="https://app-1496457103.000webhostapp.com/PhotoUpload/img_to_server.php" ;
     String cost_value;
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_item);
 
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
         CaptureImageFromCamera = (Button)findViewById(R.id.button);
         ImageViewHolder = (ImageView)findViewById(R.id.imageView);
         UploadImageToServer = (Button) findViewById(R.id.button2);
         imageName = (EditText)findViewById(R.id.editText);
         cost=(EditText)findViewById(R.id.editText2);
+        tv =(TextView)findViewById(R.id.merName);
+
+        tv.setText(pref.getString("loginMer","Login Again"));
 
         //EnableRuntimePermissionToAccessCamera();
 
@@ -166,6 +177,7 @@ public class UploadItem extends AppCompatActivity {
                 HashMapParams.put(ImageNameFieldOnServer, GetImageNameFromEditText);
                 HashMapParams.put(ImagePathFieldOnServer, ConvertImage);
                 HashMapParams.put("cost",cost_value);
+                HashMapParams.put("merch",pref.getString("loginMer","HD"));
                 String FinalData = imageProcessClass.ImageHttpRequest(ImageUploadPathOnSever, HashMapParams);
                 return FinalData;
             }

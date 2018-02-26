@@ -38,7 +38,7 @@ public class UpdateItem extends AppCompatActivity {
 
     String updatedName,updatedCost;
     int update_ID;
-    GetAllItems getAllItems = new GetAllItems();
+    GetMerchantItems getMerchantItems = new GetMerchantItems();
 
     JSONParser jsonParser=new JSONParser();
 
@@ -62,7 +62,7 @@ public class UpdateItem extends AppCompatActivity {
         int pos=b2.getInt("pos");
         update_ID=b2.getInt("id");
 //        iv.setImageBitmap(GetAllItems.bitmaps[pos]);
-        Glide.with(getApplicationContext()).load(getAllItems.getAllUrls(pos))
+        Glide.with(getApplicationContext()).load(getMerchantItems.getAllUrls(pos))
                 .thumbnail(0.5f)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)

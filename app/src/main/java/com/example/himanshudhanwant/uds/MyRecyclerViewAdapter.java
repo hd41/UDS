@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -24,9 +27,12 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private List<Integer> mData = Collections.emptyList();
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
+    private Context context;
+    GetAllItems getAllItems= new GetAllItems();
 
     // data is passed into the constructor
     public MyRecyclerViewAdapter(Context context, List<Integer> data) {
+        this.context=context;
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -42,7 +48,13 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     // binds the data to the textview in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.myImageView.setImageResource(mData.get(position));
+//        holder.myImageView.setImageResource(mData.get(position));
+        Glide.with(context).load(getAllItems.getAllUrls(9-2*position-1))
+                .fitCenter()
+                .thumbnail(0.5f)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.myImageView);
 //        String url="";
 //        holder.myImageView.setImageBitmap(getBitmapFromURL(url));
     }

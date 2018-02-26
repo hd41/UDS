@@ -62,10 +62,9 @@ public class Home extends AppCompatActivity implements MyRecyclerViewAdapter.Ite
         dataHelper dh= new dataHelper(getApplication());
         dh.delete_all();
 
-        animalNames.add(R.drawable.horse);
-        animalNames.add(R.drawable.dog);
-        animalNames.add(R.drawable.camel);
-        animalNames.add(R.drawable.cat);
+        for(int i=0;i<5;i++){
+            animalNames.add(R.drawable.horse);
+        }
 
         // set up the RecyclerView
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.promo_recycler_view);
@@ -84,20 +83,11 @@ public class Home extends AppCompatActivity implements MyRecyclerViewAdapter.Ite
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Implementing an alert to Login
-
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(Home.this);
-
-                // Setting Dialog Title
                 alertDialog.setTitle("Alert");
-
-                // Setting Dialog Message
                 alertDialog.setMessage("Login to Proceed");
-
-                // Setting Icon to Dialog
                 alertDialog.setIcon(R.drawable.add_user);
 
-                // Setting Positive "Yes" Button
                 alertDialog.setPositiveButton("Login", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int which) {
 
@@ -106,8 +96,6 @@ public class Home extends AppCompatActivity implements MyRecyclerViewAdapter.Ite
                         startActivity(in);
                     }
                 });
-
-                // Setting Negative "NO" Button
                 alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Write your code here to invoke NO event
@@ -115,8 +103,6 @@ public class Home extends AppCompatActivity implements MyRecyclerViewAdapter.Ite
                         dialog.cancel();
                     }
                 });
-
-                // Showing Alert Message
                 alertDialog.show();
 
                 //new fetchMerchants().execute();
@@ -209,13 +195,13 @@ public class Home extends AppCompatActivity implements MyRecyclerViewAdapter.Ite
 
     @Override
     public void onItemClick(View view, int position) {
-        Intent in =new Intent(getApplicationContext(),Promo_large.class);
+        Intent in =new Intent(getApplicationContext(),SingleItemOrder.class);
         Bundle bu=new Bundle();
         Toast.makeText(getApplicationContext(),"you clicked "+position,Toast.LENGTH_SHORT).show();
-        bu.putInt("pos",position);
-        bu.putString("name",getAllItems.itemNames[position]);
-        bu.putString("cost",getAllItems.itemCosts[position]);
-        bu.putString("mer",getAllItems.itemMerchant[position]);
+        bu.putInt("pos",9-2*position-1);
+        bu.putString("name",getAllItems.itemNames[9-2*position-1]);
+        bu.putString("cost",getAllItems.itemCosts[9-2*position-1]);
+        bu.putString("mer",getAllItems.itemMerchant[9-2*position-1]);
         in.putExtra("bun",bu);
         startActivity(in);
     }

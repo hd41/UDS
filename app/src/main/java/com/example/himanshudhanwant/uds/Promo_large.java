@@ -28,6 +28,7 @@ public class Promo_large extends AppCompatActivity implements AdapterView.OnItem
     TextView tv,cost1;
     ImageView iv;
     GetAllItems getAllItems = new GetAllItems();
+    GetMerchantItems getMerchantItems = new GetMerchantItems();
     Spinner spinner;
     Button addToCart;
     Integer qty=0;
@@ -71,8 +72,7 @@ public class Promo_large extends AppCompatActivity implements AdapterView.OnItem
         cost1.setText("Rs. "+cos);
         tv.setText(name);
 //        iv.setImageBitmap(getAllItems.bitmaps[pos]);
-        Log.d("test",getAllItems.getAllUrls(pos));
-        Glide.with(getApplicationContext()).load(getAllItems.getAllUrls(pos))
+        Glide.with(getApplicationContext()).load(getMerchantItems.getAllUrls(pos))
                 .thumbnail(0.5f)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -92,10 +92,10 @@ public class Promo_large extends AppCompatActivity implements AdapterView.OnItem
             @Override
             public void onClick(View view) {
                 Log.d("test","click");
-                if(!dh.find(getAllItems.Ids[pos])){
-                    dh.insert(getAllItems.Ids[pos],getAllItems.itemNames[pos],Integer.parseInt(getAllItems.itemCosts[pos]),qty, merName);
+                if(!dh.find(getMerchantItems.Ids[pos])){
+                    dh.insert(getMerchantItems.Ids[pos],getMerchantItems.itemNames[pos],Integer.parseInt(getMerchantItems.itemCosts[pos]),qty, merName);
                 }else{
-                    dh.update(getAllItems.Ids[pos],getAllItems.itemNames[pos],Integer.parseInt(getAllItems.itemCosts[pos]),qty, merName);
+                    dh.update(getMerchantItems.Ids[pos],getMerchantItems.itemNames[pos],Integer.parseInt(getMerchantItems.itemCosts[pos]),qty, merName);
                 }
                 addToCart.setEnabled(false);
                 addToCart.setBackgroundColor(0xFFFF4444);
