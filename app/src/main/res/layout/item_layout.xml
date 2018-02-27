@@ -45,14 +45,26 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4sp"
+            android:layout_weight="0.3"
+            android:gravity="right"
+            android:text="Rs."
+            android:textColor="@color/dark_brown"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/cost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="4sp"
-            android:layout_weight="0.6"
-            android:gravity="right"
-            android:text="Betty"
+            android:layout_weight="0.3"
+            android:gravity="left"
+            android:text="60"
             android:textColor="@color/dark_brown"
             android:textSize="12sp"
             android:textStyle="bold" />
