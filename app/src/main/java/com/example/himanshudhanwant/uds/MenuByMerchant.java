@@ -11,12 +11,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 public class MenuByMerchant extends AppCompatActivity {
 
     KhanaRecyclerViewAdapter mAdapter;
     RecyclerView mRecyclerView;
     String merName;
+    dataHelper dh;
 
     GetMerchantItems getMerchantItems;
 
@@ -25,6 +27,7 @@ public class MenuByMerchant extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_by_merchant);
 
+        dh= new dataHelper(getApplication());
         Intent in=getIntent();
         Bundle bun1=in.getBundleExtra("bun");
         merName=bun1.getString("merName");
@@ -63,8 +66,12 @@ public class MenuByMerchant extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId()==R.id.action_cart) {
-            Intent intent = new Intent(this,Cart.class);
-            startActivity(intent);
+            if(dh.numberOfRows()>0){
+                Intent intent = new Intent(this,Cart.class);
+                startActivity(intent);
+            }else{
+                Toast.makeText(getApplicationContext(),"Insert some items to cart to check out",Toast.LENGTH_SHORT).show();
+            }
             return true;
         }
         return true;

@@ -2,7 +2,9 @@ package com.example.himanshudhanwant.uds;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -35,6 +37,7 @@ public class HomeWithLogin extends AppCompatActivity implements MyRecyclerViewAd
     KhanaRecyclerViewAdapter mAdapter;
     RecyclerView mRecyclerView;
     Button btn;
+    dataHelper dh;
 
     public static final String GET_IMAGE_URL="https://app-1496457103.000webhostapp.com/PhotoUpload/getAllItems.php";
     GetAllItems getAllItems;
@@ -43,14 +46,16 @@ public class HomeWithLogin extends AppCompatActivity implements MyRecyclerViewAd
     public ArrayList<String> merchants=new ArrayList<String>();
 
     ArrayList<Integer> animalNames=new ArrayList<>();
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_with_login);
 
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
         btn=(Button)findViewById(R.id.order_by_merchant);
-        dataHelper dh= new dataHelper(getApplication());
+        dh= new dataHelper(getApplication());
         dh.delete_all();
 
         for(int i=0;i<5;i++){
@@ -193,17 +198,31 @@ public class HomeWithLogin extends AppCompatActivity implements MyRecyclerViewAd
                 startActivity(in1);
                 break;
             case R.id.cart:
-                Intent in2 =new Intent(getApplicationContext(),Cart.class);
-                startActivity(in2);
+                if(dh.numberOfRows()>0){
+                    Intent intent = new Intent(this,Cart.class);
+                    startActivity(intent);
+                    return true;
+                }else{
+                    Toast.makeText(getApplicationContext(),"Add item to check out",Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.signOut:
+                pref.edit().clear().commit();
+                Intent in3 = new Intent(getApplicationContext(), Home.class);
+                startActivity(in3);
                 break;
             case R.id.exit:
                 finish();
                 break;
         }
         if(item.getItemId()==R.id.action_cart) {
-            Intent intent = new Intent(this,Cart.class);
-            startActivity(intent);
-            return true;
+            if(dh.numberOfRows()>0){
+                Intent intent = new Intent(this,Cart.class);
+                startActivity(intent);
+                return true;
+            }else{
+                Toast.makeText(getApplicationContext(),"Add item to check out",Toast.LENGTH_SHORT).show();
+            }
         }
         return true;
     }

@@ -9,6 +9,9 @@
         android:id="@+id/cart"
         android:title="Cart"/>
     <item
+        android:id="@+id/signOut"
+        android:title="Sign Out"/>
+    <item
         android:id="@+id/exit"
         android:title="Exit"/>
 </menu>

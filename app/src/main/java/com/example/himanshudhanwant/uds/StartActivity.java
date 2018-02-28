@@ -3,8 +3,11 @@ package com.example.himanshudhanwant.uds;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.ImageView;
 
 import org.json.JSONException;
@@ -23,10 +26,14 @@ public class StartActivity extends Activity {
 
     Thread splashTread;
     ImageView imageView;
+    SharedPreferences pref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
+
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
         imageView = (ImageView)findViewById(R.id.splash);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         //int[] ids = new int[]{R.drawable.s_img,R.drawable.s_image_black, R.drawable.s_image_black2};
@@ -45,10 +52,19 @@ public class StartActivity extends Activity {
                         sleep(100);
                         waited += 100;
                     }
-                    Intent intent = new Intent(StartActivity.this,
-                            Home.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    startActivity(intent);
+
+                    String check=pref.getString("loginName", null );
+                    if(check != null){ // logged in
+                        Intent intent = new Intent(StartActivity.this,
+                                HomeWithLogin.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent);
+                    }else {
+                        Intent intent = new Intent(StartActivity.this,
+                                Home.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent);
+                    }
                     StartActivity.this.finish();
                 } catch (InterruptedException e) {
                     // do nothing

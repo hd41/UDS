@@ -87,7 +87,7 @@ public class SingleItemOrder extends AppCompatActivity implements AdapterView.On
             @Override
             public void onClick(View view) {
 
-                String final_order=name+"/"+cost+"/"+mer+"-";
+                String final_order=name+"/"+cost+"/"+qty+"-";
                 Intent i= new Intent(getApplicationContext(),Details.class);
                 Bundle b1=new Bundle();
                 b1.putString("final_order",final_order);

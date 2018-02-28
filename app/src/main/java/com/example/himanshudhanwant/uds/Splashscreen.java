@@ -58,18 +58,11 @@ public class Splashscreen extends Activity {
 
 
 
-                        String check=pref.getString("loginName", null);
-                        if(check != null){ //logged in
-                            Intent intent = new Intent(Splashscreen.this,
-                                    HomeWithLogin.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                            startActivity(intent);
-                        }else{
-                            Intent intent = new Intent(Splashscreen.this,
-                                    Home.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                            startActivity(intent);
-                        }
+                        String check=pref.getString("loginName", "");
+                        Intent intent = new Intent(Splashscreen.this,
+                                Home.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent);
                         Splashscreen.this.finish();
                     } catch (InterruptedException e) {
                         // do nothing
