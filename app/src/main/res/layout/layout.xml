@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="80dp"
+    android:orientation="vertical"
+    android:padding="5dp" >
+
+    <ImageView
+        android:id="@+id/iv_icon_social"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/images"/>
+
+    <LinearLayout
+        android:id="@+id/thumbnail"
+        android:layout_width="fill_parent"
+        android:layout_height="85dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="0dp"
+        android:layout_toRightOf="@+id/iv_icon_social"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="5dip"
+        android:visibility="visible" >
+
+        <TextView
+            android:id="@+id/row"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="Sample text"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/row2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="3dp"
+            android:paddingLeft="10dp"
+            android:maxEms="20"
+            android:maxLines="2"
+            android:singleLine="false"
+            android:ellipsize="end"
+            android:text="Sample text2"
+            android:textColor="#808080"
+            android:textSize="15dp"
+            android:textStyle="normal"
+            android:visibility="visible" />
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/imageView"
+        android:layout_alignTop="@+id/iv_icon_social"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>
