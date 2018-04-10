@@ -18,7 +18,7 @@
  *
  */
 
-package com.truiton.bottomnavigation;
+package com.example.himanshudhanwant.uds;
 
 import android.app.Activity;
 import android.content.Context;
@@ -31,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
 public class BaseAdapter2 extends BaseAdapter {
 
     private Activity activity;

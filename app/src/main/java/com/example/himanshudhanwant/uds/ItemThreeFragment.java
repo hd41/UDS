@@ -18,7 +18,7 @@
  *
  */
 
-package com.truiton.bottomnavigation;
+package com.example.himanshudhanwant.uds;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -129,7 +129,7 @@ public class ItemThreeFragment extends Fragment {
                 if(cost_value.isEmpty() || GetImageNameFromEditText.isEmpty())
                 {
                     //EditText is empty
-                    Toast.makeText(getContext(),"Pehle sab bharo",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"Pehle sab bharo", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -183,7 +183,7 @@ public class ItemThreeFragment extends Fragment {
                 progressDialog.dismiss();
 
                 // Printing uploading success message coming from server on android app.
-                Toast.makeText(getActivity(),"Uploaded Successfully",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),"Uploaded Successfully", Toast.LENGTH_LONG).show();
 
                 // Setting image as transparent after done uploading.
                 ImageViewHolder.setImageResource(android.R.color.transparent);
@@ -207,7 +207,7 @@ public class ItemThreeFragment extends Fragment {
 
     public class ImageProcessClass{
 
-        public String ImageHttpRequest(String requestURL,HashMap<String, String> PData) {
+        public String ImageHttpRequest(String requestURL, HashMap<String, String> PData) {
             StringBuilder stringBuilder = new StringBuilder();
 
             try {
@@ -286,8 +286,13 @@ public class ItemThreeFragment extends Fragment {
         switch(item.getItemId())
         {
             case R.id.itemList:
-                Intent in =new Intent(getContext(),MainActivity.class);
+                Intent in =new Intent(getContext(),ItemList.class);
                 startActivity(in);
+                break;
+            case R.id.signOut:
+                pref.edit().clear().commit();
+                Intent in3 = new Intent(getContext(), Home.class);
+                startActivity(in3);
                 break;
             case R.id.exit:
                 break;

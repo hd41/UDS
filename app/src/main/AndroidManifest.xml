@@ -48,6 +48,8 @@
         <activity android:name=".MenuByMerchant" />
         <activity android:name=".SingleItemOrder" />
         <activity android:name=".HomeWithLogin" />
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".Order"/>
         <activity
             android:name=".Profile"
             android:label="@string/title_activity_profile"

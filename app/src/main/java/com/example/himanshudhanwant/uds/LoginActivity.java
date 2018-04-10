@@ -175,7 +175,7 @@ public class LoginActivity extends AppCompatActivity {
             // dismiss the dialog once done
             pDialog.dismiss();
             switch (flag){
-                case 1: Intent in = new Intent(getApplicationContext(),UploadItem.class);
+                case 1: Intent in = new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(in);
                     break;
                 case 2: Intent in2= new Intent(getApplicationContext(),HomeWithLogin.class);

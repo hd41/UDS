@@ -18,7 +18,7 @@
  *
  */
 
-package com.truiton.bottomnavigation;
+package com.example.himanshudhanwant.uds;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -28,21 +28,14 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,62 +82,5 @@ public class MainActivity extends AppCompatActivity {
 
         //Used to select an item programmatically
         //bottomNavigationView.getMenu().getItem(2).setChecked(true);
-    }
-
-    class TheTask extends AsyncTask<Void, Void, String> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pDialog = new ProgressDialog(MainActivity.this);
-            pDialog.setMessage("Fetching orders ...");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
-            pDialog.show();
-        }
-
-        @Override
-        protected String doInBackground(Void... params) {
-            String str = "hd ";
-            try {
-                List<NameValuePair> params1 = new ArrayList<NameValuePair>();
-                params1.add(new BasicNameValuePair("name","Jingle"));
-
-                JSONObject json =jsonParser.makeHttpRequest("https://app-1496457103.000webhostapp.com/PhotoUpload/allMenuByMerchant.php",
-                        "POST", params1);
-                return json.toString().trim();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return str;
-        }
-
-        @Override
-        protected void onPostExecute(String result1) {
-
-            String[] trial=result1.split("<");
-            String result=trial[0];
-            try {
-                JSONObject object=new JSONObject(result);
-                JSONArray new_array = object.getJSONArray("menu");
-
-                for (int i = 0, count = new_array.length(); i < count; i++) {
-                    try {
-                        JSONObject jsonObject = new_array.getJSONObject(i);
-
-                        AllOrder so= new AllOrder(jsonObject.getString("order_id"),jsonObject.getString("name"),
-                                jsonObject.getString("result"),jsonObject.getString("addr"),jsonObject.getString("phone"),
-                                jsonObject.getString("date"),0);
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            pDialog.dismiss();
-        }
     }
 }

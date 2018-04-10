@@ -18,19 +18,19 @@
  *
  */
 
-package com.truiton.bottomnavigation;
+package com.example.himanshudhanwant.uds;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -58,8 +58,7 @@ public class ItemOneFragment extends Fragment {
     BaseAdapter2 adapter;
     ProgressDialog pDialog;
     JSONParser jsonParser = new JSONParser();
-
-    AllOrder ao = new AllOrder();
+    SharedPreferences pref;
 
     public static ItemOneFragment newInstance() {
         ItemOneFragment fragment = new ItemOneFragment();
@@ -69,6 +68,8 @@ public class ItemOneFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        pref = PreferenceManager
+                .getDefaultSharedPreferences(getContext());
     }
 
     @Override
@@ -114,7 +115,7 @@ public class ItemOneFragment extends Fragment {
             String str = "hd ";
             try {
                 List<NameValuePair> params1 = new ArrayList<NameValuePair>();
-                params1.add(new BasicNameValuePair("name","Jingle"));
+                params1.add(new BasicNameValuePair("name",pref.getString("loginMer","")));
 
                 JSONObject json =jsonParser.makeHttpRequest("https://app-1496457103.000webhostapp.com/PhotoUpload/allMenuByMerchant.php",
                         "POST", params1);
@@ -138,9 +139,6 @@ public class ItemOneFragment extends Fragment {
                     try {
                         JSONObject jsonObject = new_array.getJSONObject(i);
 
-                        AllOrder so= new AllOrder(jsonObject.getString("order_id"),jsonObject.getString("name"),
-                                jsonObject.getString("result"),jsonObject.getString("addr"),jsonObject.getString("phone"),
-                                jsonObject.getString("date"),0);
 
                         order_id.add(jsonObject.getString("order_id"));
                         order_name.add(jsonObject.getString("name"));

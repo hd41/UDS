@@ -53,13 +53,20 @@ public class StartActivity extends Activity {
                         waited += 100;
                     }
 
+                    String mer= pref.getString("loginMer",null);
                     String check=pref.getString("loginName", null );
-                    if(check != null){ // logged in
+                    if(mer != null){//merchant login
+                        Intent intent = new Intent(StartActivity.this,
+                                MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent);
+                    }
+                    else if(check != null){ // customer logged in
                         Intent intent = new Intent(StartActivity.this,
                                 HomeWithLogin.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                         startActivity(intent);
-                    }else {
+                    }else {// nobody has logged
                         Intent intent = new Intent(StartActivity.this,
                                 Home.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

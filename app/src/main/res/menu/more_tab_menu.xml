@@ -5,6 +5,9 @@
         android:id="@+id/itemList"
         android:title="Show all items"/>
     <item
+        android:id="@+id/signOut"
+        android:title="Sign Out"/>
+    <item
         android:id="@+id/exit"
         android:title="Exit"/>
 </menu>

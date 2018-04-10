@@ -121,7 +121,6 @@ public class OrderByMerchant extends AppCompatActivity {
                     JSONObject json =jsonParser.makeHttpRequest(GET_IMAGE_URL1,
                             "POST", params);
                     return json.toString().trim();
-
                 }catch(Exception e){
                     e.printStackTrace();
                     return null;
